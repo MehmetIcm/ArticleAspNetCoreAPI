@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "tV3ffB9H66YIEkhGZ7edXWS4SiLbQIGtIew2vxYvWpC4ZQIVwzz/ikNtRoQm6BX1l2plLLGxMTZmZEaGfIqGEQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mehme\\source\\repos\\ArticleAspNetCoreWebAPI\\AricleApp.Domains\\AricleApp.Domains.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mehme\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}

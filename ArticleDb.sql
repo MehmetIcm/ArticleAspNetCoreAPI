@@ -1,0 +1,154 @@
+USE [master]
+GO
+/****** Object:  Database [ArticleDb]    Script Date: 30.10.2020 21:40:00 ******/
+CREATE DATABASE [ArticleDb]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'ArticleDb', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\ArticleDb.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'ArticleDb_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\ArticleDb_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [ArticleDb] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [ArticleDb].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [ArticleDb] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [ArticleDb] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [ArticleDb] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [ArticleDb] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [ArticleDb] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [ArticleDb] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [ArticleDb] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [ArticleDb] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [ArticleDb] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [ArticleDb] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [ArticleDb] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [ArticleDb] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [ArticleDb] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [ArticleDb] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [ArticleDb] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [ArticleDb] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [ArticleDb] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [ArticleDb] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [ArticleDb] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [ArticleDb] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [ArticleDb] SET READ_COMMITTED_SNAPSHOT ON 
+GO
+ALTER DATABASE [ArticleDb] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [ArticleDb] SET RECOVERY FULL 
+GO
+ALTER DATABASE [ArticleDb] SET  MULTI_USER 
+GO
+ALTER DATABASE [ArticleDb] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [ArticleDb] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [ArticleDb] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [ArticleDb] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [ArticleDb] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'ArticleDb', N'ON'
+GO
+ALTER DATABASE [ArticleDb] SET QUERY_STORE = OFF
+GO
+USE [ArticleDb]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 30.10.2020 21:40:00 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Articles]    Script Date: 30.10.2020 21:40:00 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Articles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CreatedDate] [datetime2](7) NULL,
+	[UpdateDate] [datetime2](7) NULL,
+	[DeleteDate] [datetime2](7) NULL,
+	[IsActive] [bit] NOT NULL,
+	[ArticleContent] [nvarchar](max) NULL,
+	[CategoriesId] [int] NULL,
+ CONSTRAINT [PK_Articles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Categories]    Script Date: 30.10.2020 21:40:00 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categories](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CategoryName] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Categories] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20201029200827_init', N'3.1.9')
+GO
+SET IDENTITY_INSERT [dbo].[Articles] ON 
+GO
+INSERT [dbo].[Articles] ([Id], [CreatedDate], [UpdateDate], [DeleteDate], [IsActive], [ArticleContent], [CategoriesId]) VALUES (1, CAST(N'2020-10-30T20:47:13.0956151' AS DateTime2), NULL, NULL, 1, N'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac nisi tincidunt, porta est nec, molestie mauris. Pellentesque sit amet ante sodales, ullamcorper metus non', NULL)
+GO
+INSERT [dbo].[Articles] ([Id], [CreatedDate], [UpdateDate], [DeleteDate], [IsActive], [ArticleContent], [CategoriesId]) VALUES (2, CAST(N'2020-10-30T21:46:13.0956151' AS DateTime2), NULL, NULL, 1, N'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Articles] OFF
+GO
+/****** Object:  Index [IX_Articles_CategoriesId]    Script Date: 30.10.2020 21:40:00 ******/
+CREATE NONCLUSTERED INDEX [IX_Articles_CategoriesId] ON [dbo].[Articles]
+(
+	[CategoriesId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Articles]  WITH CHECK ADD  CONSTRAINT [FK_Articles_Categories_CategoriesId] FOREIGN KEY([CategoriesId])
+REFERENCES [dbo].[Categories] ([Id])
+GO
+ALTER TABLE [dbo].[Articles] CHECK CONSTRAINT [FK_Articles_Categories_CategoriesId]
+GO
+USE [master]
+GO
+ALTER DATABASE [ArticleDb] SET  READ_WRITE 
+GO
